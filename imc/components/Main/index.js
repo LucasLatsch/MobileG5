@@ -65,12 +65,14 @@ export default function Main() {
 const styles = StyleSheet.create({
   container: {
     // flex: 1,
-    marginTop: 100,
+    marginTop: 120,
     justifyContent: "center",
     alignItems: "center",
     backgroundColor: "#8EB7F5",
-    padding: 120,
-    borderRadius: 5,
+    paddingTop: 120,
+    paddingBottom: 120,
+    padding: 55,
+    borderRadius: 25,
   },
   input: {
     fontSize: 25,
