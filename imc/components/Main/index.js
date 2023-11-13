@@ -13,66 +13,50 @@ export default function Main() {
   const [altura, setAltura] = useState("");
   const [imc, setImc] = useState("");
   const [messageImc, setMessageImc] = useState("");
+  let P = 0;
 
   const validarImc = () => {
     if (peso > 0 && altura > 0) {
       calcularImc();
-      const P = imc;
-      if (P <= 18.5) {
-        setMessageImc("Magreza");
-        console.log(P);
-      }
-      if (P > 18.5 && imc <= 24.9) {
-        setMessageImc("Normal");
-      }
-      if (P > 29.9) {
-        setMessageImc("Sobrepeso");
-      }
-      if (P > 34.9) {
-        setMessageImc("Obesidade grau 1");
-      }
-      if (P > 24.9) {
-        setMessageImc("Obesidade grau 3");
-      }
-      if (P > 39.9) {
-        setMessageImc("Obesidade grau 3");
-      }
-      setAltura("");
-      setPeso("");
     } else {
-      setMessageImc("Campos vazios, tente novamente");
+      setMessageImc("Valor inválido");
       setAltura("");
       setPeso("");
       setImc("");
     }
   };
   const calcularImc = () => {
-    setImc(peso / (altura * altura).toFixed(2));
+    P = (peso / (altura * altura)).toFixed(2);
+    setImc(P);
+    console.log(peso);
+    console.log(altura);
+    console.log(P);
     setPeso("");
     setAltura("");
     retornoMsg();
   };
 
   const retornoMsg = () => {
-    const P = imc;
-    if (imc <= 18.5) {
+    if (P < 18.5) {
       setMessageImc("Magreza");
     }
-    if ({ imc } > 18.5 && imc <= 24.9) {
+    if (P > 18.5 && P <= 24.9) {
       setMessageImc("Normal");
     }
-    if ({ imc } > 29.9) {
+    if (P > 24.9 && P <= 29.9) {
       setMessageImc("Sobrepeso");
     }
-    if (imc > 34.9) {
+    if (P > 29.9 && P <= 34.9) {
       setMessageImc("Obesidade grau 1");
     }
-    if (imc > 24.9) {
+    if (P > 34.9 && P <= 39.9) {
+      setMessageImc("Obesidade grau 2");
+    }
+    if (P > 39.9) {
       setMessageImc("Obesidade grau 3");
     }
-    if (imc > 39.9) {
-      setMessageImc("Obesidade grau 3");
-    }
+    setAltura("");
+    setPeso("");
   };
 
   return (
@@ -82,7 +66,7 @@ export default function Main() {
           <Text style={styles.label}>Peso</Text>
           <TextInput
             style={styles.input}
-            placeholder="Digite seu peso"
+            placeholder="Ex: 60kg"
             value={peso.toString()}
             onChangeText={(text) => setPeso(text)}
           />
@@ -91,13 +75,13 @@ export default function Main() {
           <Text style={styles.label}>Altura</Text>
           <TextInput
             style={styles.input}
-            placeholder="Digite sua altura"
+            placeholder="Ex: 1.60m"
             value={altura.toString()}
             onChangeText={(text) => setAltura(text)}
           />
         </View>
         <View style={styles.btncard}>
-          <TouchableOpacity style={styles.btn} onPress={validarImc}>
+          <TouchableOpacity style={styles.btn} onPress={() => validarImc()}>
             <Text style={styles.btnText}>Calcular</Text>
           </TouchableOpacity>
         </View>
