@@ -5,27 +5,74 @@ import {
   TextInput,
   TouchableOpacity,
   StyleSheet,
+  _View,
 } from "react-native";
 
 export default function Main() {
   const [peso, setPeso] = useState("");
   const [altura, setAltura] = useState("");
   const [imc, setImc] = useState("");
-  const [messageImc, setMessageImc] = useState("preencha os dados");
+  const [messageImc, setMessageImc] = useState("");
 
   const validarImc = () => {
-    if (peso && altura) {
+    if (peso > 0 && altura > 0) {
       calcularImc();
+      const P = imc;
+      if (P <= 18.5) {
+        setMessageImc("Magreza");
+        console.log(P);
+      }
+      if (P > 18.5 && imc <= 24.9) {
+        setMessageImc("Normal");
+      }
+      if (P > 29.9) {
+        setMessageImc("Sobrepeso");
+      }
+      if (P > 34.9) {
+        setMessageImc("Obesidade grau 1");
+      }
+      if (P > 24.9) {
+        setMessageImc("Obesidade grau 3");
+      }
+      if (P > 39.9) {
+        setMessageImc("Obesidade grau 3");
+      }
+      setAltura("");
+      setPeso("");
+    } else {
+      setMessageImc("Campos vazios, tente novamente");
+      setAltura("");
+      setPeso("");
+      setImc("");
     }
-
-    console.log({ altura });
-    console.log({ peso });
   };
   const calcularImc = () => {
     setImc(peso / (altura * altura).toFixed(2));
-    setPeso(0);
-    setAltura(0);
-    console.log({ imc });
+    setPeso("");
+    setAltura("");
+    retornoMsg();
+  };
+
+  const retornoMsg = () => {
+    const P = imc;
+    if (imc <= 18.5) {
+      setMessageImc("Magreza");
+    }
+    if ({ imc } > 18.5 && imc <= 24.9) {
+      setMessageImc("Normal");
+    }
+    if ({ imc } > 29.9) {
+      setMessageImc("Sobrepeso");
+    }
+    if (imc > 34.9) {
+      setMessageImc("Obesidade grau 1");
+    }
+    if (imc > 24.9) {
+      setMessageImc("Obesidade grau 3");
+    }
+    if (imc > 39.9) {
+      setMessageImc("Obesidade grau 3");
+    }
   };
 
   return (
@@ -56,6 +103,7 @@ export default function Main() {
         </View>
         <View style={styles.viewcontainer}>
           <Text style={styles.result}>{imc}</Text>
+          <Text style={styles.result}>{messageImc}</Text>
         </View>
       </View>
     </View>
@@ -131,5 +179,6 @@ const styles = StyleSheet.create({
   result: {
     fontSize: 25,
     textAlign: "center",
+    boxSizing: "border-box",
   },
 });
