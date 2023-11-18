@@ -3,7 +3,6 @@ import {
   View,
   Text,
   TextInput,
-  Button,
   Modal,
   StyleSheet,
   Image,
@@ -18,7 +17,10 @@ export default function CalculadoraC() {
   const [modalVisible, setModalVisible] = useState(false);
 
   const calcular = () => {
-    if (alcool && gasolina) {
+    if (!gasolina || !alcool) {
+      setResultado("Valor inválido!");
+      setModalVisible(true);
+    } else if (!isNaN(alcool) && !isNaN(gasolina)) {
       const resultadoCalculo = parseFloat(alcool) / parseFloat(gasolina);
 
       if (resultadoCalculo < 0.7) {
@@ -27,6 +29,9 @@ export default function CalculadoraC() {
         setResultado("Abasteça com gasolina.");
       }
 
+      setModalVisible(true);
+    } else {
+      setResultado("Valor inválido!");
       setModalVisible(true);
     }
   };
@@ -122,15 +127,17 @@ const style = StyleSheet.create({
     color: "white",
   },
   containerModal: {
-    flex: 1,
+    width: 300,
+    height: 300,
     alignItems: "center",
     justifyContent: "center",
-    backgroundColor: "rgba(0, 0, 0, 0.9)",
+    backgroundColor: "rgba(255, 255, 255, 0.95)",
+    margin: 150,
+    marginLeft: 55,
   },
   textoModal: {
     paddingTop: 20,
     fontSize: 25,
     fontWeight: "bold",
-    color: "green",
   },
 });
