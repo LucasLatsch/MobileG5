@@ -9,6 +9,7 @@ import {
   Image,
   TouchableOpacity,
 } from "react-native";
+import MeuInput from "../../components/Inputs";
 
 export default function CalculadoraC() {
   const [alcool, setAlcool] = useState("");
@@ -49,6 +50,7 @@ export default function CalculadoraC() {
           value={alcool}
           onChangeText={(text) => setAlcool(text)}
         />
+
         <TextInput
           style={style.inputs}
           placeholder="Preço da gasolina"
