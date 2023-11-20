@@ -9,9 +9,9 @@ const Drawer = createDrawerNavigator();
 export default function AppRouter() {
   return (
     <Drawer.Navigator>
-      {/* <Drawer.Screen name="Sobre" component={Sobre} /> */}
       <Drawer.Screen name="Login" component={Login} />
       <Drawer.Screen name="Home" component={Home} />
+      <Drawer.Screen name="Sobre" component={Sobre} />
     </Drawer.Navigator>
   );
 }

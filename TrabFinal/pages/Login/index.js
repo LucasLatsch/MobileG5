@@ -1,6 +1,8 @@
-import { View, Text, StyleSheet } from "react-native";
-import React from "react";
+import { View, Text, StyleSheet, Image } from "react-native";
+import React, { useState } from "react";
 import { useNavigation } from "@react-navigation/native";
+import MeuInput from "../../components/Input/index";
+import Botao from "../../components/Botao/index";
 
 export default function Login() {
   const [username, setUsername] = useState("");
@@ -9,10 +11,13 @@ export default function Login() {
 
   const NavLogin = () => {
     if (username === "usuario" && password === "senha") {
-      Alert.alert("Login bem-sucedido!");
+      console.warn("Login bem-sucedido!");
       navigation.navigate("Home");
+    } else if (username === "" && password === "") {
+      // alert("Campos vazios!. Tente novamente.");
+      console.log("Login bem-sucedido!");
     } else {
-      Alert.alert("Credenciais inválidas. Tente novamente.");
+      alert("Credenciais invalidas. Tente novamente.");
     }
   };
 
@@ -20,7 +25,7 @@ export default function Login() {
     <View style={styles.container}>
       <View style={styles.card}>
         <Image
-          source={require("../../Img/1785348.ico")}
+          source={require("../../Img/logo.jpg")}
           style={{ width: 60, height: 60 }}
         />
         <Text style={styles.saudacao}>
@@ -28,7 +33,7 @@ export default function Login() {
         </Text>
         <MeuInput
           label="Login"
-          placeholder="Exemplo@gmail.com"
+          placeholder="Ex@gmail.com"
           onChangeText={setUsername}
         />
         <MeuInput
@@ -55,7 +60,7 @@ const styles = StyleSheet.create({
   saudacao: {
     marginBottom: 50,
     fontSize: 30,
-    fontWeight: "bolder",
+    fontWeight: "700",
   },
   card: {
     backgroundColor: "white",
