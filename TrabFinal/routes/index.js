@@ -1,4 +1,4 @@
-import React from "react";
+import { React } from "react";
 import { createDrawerNavigator } from "@react-navigation/drawer";
 import Sobre from "../pages/Sobre";
 import Home from "../pages/Home";
@@ -12,10 +12,10 @@ export default function AppRouter() {
       <Drawer.Screen
         name="Login"
         component={Login}
-        options={{ headerShown: false }}
+        options={{ headerShown: true }}
       />
-      <Drawer.Screen name="Home" component={Home} />
-      <Drawer.Screen name="Sobre" component={Sobre} />
+      <Drawer.Screen name="Pagina inicial" component={Home} />
+      <Drawer.Screen name="Integrantes" component={Sobre} />
     </Drawer.Navigator>
   );
 }

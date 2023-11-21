@@ -14,6 +14,7 @@ import {
   View,
 } from "react-native";
 import ModalComponent from "../../components/Modal";
+import Botao from "../../components/Botao";
 
 const DATA = [
   {
@@ -86,7 +87,14 @@ const Home = () => {
       <Modal visible={exibirModal} transparent={true}>
         <ModalComponent
           handleClose={() => setExibirModal(false)}
-          handleSalvar={() => alert("Produto salvo com sucesso")}
+          handleSalvar={() => [
+            alert("Produto salvo com sucesso"),
+            setExibirModal(false),
+          ]}
+          handleDeletar={() => [
+            alert("Produto deletado com sucesso"),
+            setExibirModal(false),
+          ]}
           {...itemSelecionado}
         />
       </Modal>
@@ -111,6 +119,9 @@ const Home = () => {
 
       <ScrollView vertical style={styles.scrollV} scrollEventThrottle={16}>
         <View style={styles.container}>
+          <View style={styles.btn}>
+            <Botao texto="Cadastrar" acao={handleItemPress} />
+          </View>
           <FlatList
             data={DATA}
             renderItem={({ item }) => <Item item={item} />}
@@ -119,13 +130,13 @@ const Home = () => {
         </View>
       </ScrollView>
 
-      {exibirModal && itemSelecionado && (
+      {/* {exibirModal && itemSelecionado && (
         <ModalComponent
           handleClose={() => setExibirModal(false)}
           handleSalvar={() => alert("Produto salvo com sucesso")}
           {...itemSelecionado}
         />
-      )}
+      )} */}
     </SafeAreaView>
   );
 };
@@ -155,6 +166,9 @@ const styles = StyleSheet.create({
   scrollV: {
     flex: 1,
     backgroundColor: "#F3F3F3",
+  },
+  btn: {
+    alignItems: "center",
   },
 });
 

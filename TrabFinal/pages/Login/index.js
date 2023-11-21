@@ -42,7 +42,7 @@ export default function Login() {
         />
         <MeuInput
           label="Senha"
-          placeholder="*****"
+          placeholder="**********"
           comMascara={true}
           setValor={setPassword}
         />
