@@ -1,71 +1,46 @@
+import React from "react";
 import {
   SafeAreaView,
-  View,
   ScrollView,
   Text,
   StyleSheet,
   Image,
   TouchableOpacity,
+  View,
 } from "react-native";
-import React from "react";
 
-export default function ModalComponent({
+const ModalComponent = ({
   handleClose,
   handleSalvar,
   nome,
   marca,
   cor,
   preco,
-}) {
+  imagem,
+}) => {
+  console.log("Props recebidas na modal:", { nome, marca, cor, preco, imagem });
   return (
-    <SafeAreaView style={style.containerModal}>
-      <ScrollView vertical style={style.scrollV}>
-        {/* <View style={style.cMView}>
-          <Image
-            source={require("../../assets/nikeplusF.jpg")}
-            style={style.imageSV}
-          />
+    <SafeAreaView style={styles.containerModal}>
+      <ScrollView vertical style={styles.scrollV}>
+        <View style={styles.cMView}>
+          <Image source={imagem} style={styles.imageSV} />
         </View>
-        <View style={style.cMView}>
-          <Image
-            source={require("../../assets/nikeplus.jpg")}
-            style={style.imageSV}
-          />
-        </View>
-        <View style={style.cMView}>
-          <Image
-            source={require("../../assets/nikeplusC.jpg")}
-            style={style.imageSV}
-          />
-        </View>
-        <View style={style.cMView}>
-          <Image
-            source={require("../../assets/nikeplusLS.jpg")}
-            style={style.imageSV}
-          />
-        </View>
-        <View style={style.cMView}>
-          <Image
-            source={require("../../assets/nikeplusT.jpg")}
-            style={style.imageSV}
-          />
-        </View> */}
         <Text>{nome}</Text>
         <Text>{marca}</Text>
         <Text>{cor}</Text>
         <Text>{preco}</Text>
-        <TouchableOpacity style={style.btn} onPress={handleClose}>
-          <Text style={style.textobtn}>Cancelar</Text>
+        <TouchableOpacity style={styles.btn} onPress={handleClose}>
+          <Text style={styles.textobtn}>Cancelar</Text>
         </TouchableOpacity>
-        <TouchableOpacity style={style.btn} onPress={handleSalvar}>
-          <Text style={style.textobtn}>Salvar</Text>
+        <TouchableOpacity style={styles.btn} onPress={handleSalvar}>
+          <Text style={styles.textobtn}>Salvar</Text>
         </TouchableOpacity>
       </ScrollView>
     </SafeAreaView>
   );
-}
+};
 
-const style = StyleSheet.create({
+const styles = StyleSheet.create({
   containerModal: {
     flex: 1,
     alignItems: "center",
@@ -105,3 +80,5 @@ const style = StyleSheet.create({
     backgroundColor: "#F3F3F3",
   },
 });
+
+export default ModalComponent;
