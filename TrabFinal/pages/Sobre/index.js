@@ -5,37 +5,37 @@ const DATA = [
   {
     id: "bd7acbea-c1b1-46c2-aed5-3ad53abb28ba",
     nome: "Lucas",
-    email: "Lucas@gmail.com",
+    email: "lucas@gmail.com",
     imagem: "https://avatars.githubusercontent.com/u/141193394?v=4",
   },
   {
     id: "3ac68afc-c605-48d3-a4f8-fbd91aa97f63",
     nome: "Liliane",
-    email: "Liliane@gmail.com",
+    email: "liliane@gmail.com",
     imagem: "https://avatars.githubusercontent.com/u/117579849?v=4",
   },
   {
     id: "58694a0f-3da1-471f-bd96-145571e29d72",
     nome: "Jose",
-    email: "Jose@gmail.com",
+    email: "jose@gmail.com",
     imagem: "https://avatars.githubusercontent.com/u/106778374?v=4",
   },
   {
     id: "58694a0f-3da1-471f-bd96-145571e29d73",
     nome: "Matheus",
-    email: "Matheus@gmail.com",
+    email: "matheus@gmail.com",
     imagem: "https://avatars.githubusercontent.com/u/141193943?v=4",
   },
   {
     id: "58694a0f-3da1-471f-bd96-145571e29d74",
     nome: "Edu",
-    email: "Edu@gmail.com",
+    email: "edu@gmail.com",
     imagem: "https://avatars.githubusercontent.com/u/141246270?v=4",
   },
   {
     id: "58694a0f-3da1-471f-bd96-145571e29d75",
     nome: "Paloma",
-    email: "Paloma@gmail.com",
+    email: "paloma@gmail.com",
     imagem: "https://avatars.githubusercontent.com/u/141692596?v=4",
   },
 ];

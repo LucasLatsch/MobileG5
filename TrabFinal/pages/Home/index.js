@@ -1,4 +1,4 @@
-import React, { useState, useRef } from "react";
+import React, { useState, useRef, useEffect } from "react";
 import {
   SafeAreaView,
   ScrollView,
@@ -12,6 +12,7 @@ import {
   Modal,
   FlatList,
   View,
+  axios,
 } from "react-native";
 import ModalComponent from "../../components/Modal";
 import Botao from "../../components/Botao";
@@ -66,10 +67,26 @@ const DATA = [
     imagem: require("../../assets/nikeplusF.jpg"),
   },
 ];
-
+const url = "https://65495a57dd8ebcd4ab2483d2.mockapi.io/login";
 const Home = () => {
   const [exibirModal, setExibirModal] = useState(false);
   const [itemSelecionado, setItemSelecionado] = useState(null);
+  const [produto, setProduto] = useState([]);
+
+  const getProduto = async () => {
+    try {
+      const response = await axios.get(url);
+      const data = response.data;
+      setProduto(data);
+      console.log(data);
+    } catch (error) {
+      console.log(error);
+    }
+  };
+
+  useEffect(() => {
+    getProduto();
+  }, []);
 
   const Item = ({ item }) => (
     <>
@@ -87,26 +104,47 @@ const Home = () => {
       <Modal visible={exibirModal} transparent={true}>
         <ModalComponent
           handleClose={() => setExibirModal(false)}
-          handleSalvar={() => [
-            alert("Produto salvo com sucesso"),
-            setExibirModal(false),
-          ]}
-          handleDeletar={() => [
-            alert("Produto deletado com sucesso"),
-            setExibirModal(false),
-          ]}
+          handleSalvar={atualizarProdutos}
+          handleDeletar={handleDeletar}
           {...itemSelecionado}
         />
       </Modal>
     </>
   );
-
+  const handleDeletar = async (id) => {
+    console.log("Excluir produto: ", id);
+    try {
+      const { data } = await axios.delete(`${url}/${id}`);
+      console.log(data);
+      const novoArray = produto.filter((item) => item.id != id);
+      setProduto(novoArray);
+    } catch (error) {
+      console.log(error);
+    }
+  };
   const handleItemPress = (item) => {
     console.log("Item selecionado:", item);
     setItemSelecionado(item);
     setExibirModal(true);
   };
-
+  const atualizarProdutos = async (id) => {
+    const produto = {
+      imagem: "a",
+      nome: "a",
+      classi: "a",
+      review: "a",
+      precoIni: "a",
+      precoFin: "a",
+      marca: "a",
+      cor: "a",
+      categoria: "a",
+    };
+    try {
+      const { data } = await axios.put(`${url}/${id}`, produto);
+    } catch (error) {
+      console.log(error);
+    }
+  };
   return (
     <SafeAreaView style={styles.container}>
       <StatusBar

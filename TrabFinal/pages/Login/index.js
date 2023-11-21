@@ -14,15 +14,16 @@ export default function Login() {
       setPassword("");
       setUsername("");
       alert("Login bem-sucedido!");
-
       // limpar o terminal apos login
 
-      navigation.navigate("Home");
+      navigation.navigate("Pagina inicial");
     } else if (username === "" && password === "") {
       alert("Campos vazios!. Tente novamente.");
     } else {
       alert("Credenciais invalidas. Tente novamente.");
     }
+    console.log(username);
+    console.log(password);
   };
 
   return (
