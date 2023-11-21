@@ -9,45 +9,56 @@ import {
 } from "react-native";
 import React from "react";
 
-export default function ModalComponent({ handleClose, handleComprar }) {
+export default function ModalComponent({
+  handleClose,
+  handleSalvar,
+  nome,
+  marca,
+  cor,
+  preco,
+}) {
   return (
     <SafeAreaView style={style.containerModal}>
       <ScrollView vertical style={style.scrollV}>
-        <View style={style.cMView}>
+        {/* <View style={style.cMView}>
           <Image
-            source={require("../../../assets/nikeplusF.jpg")}
+            source={require("../../assets/nikeplusF.jpg")}
             style={style.imageSV}
           />
         </View>
         <View style={style.cMView}>
           <Image
-            source={require("../../../assets/nikeplus.jpg")}
+            source={require("../../assets/nikeplus.jpg")}
             style={style.imageSV}
           />
         </View>
         <View style={style.cMView}>
           <Image
-            source={require("../../../assets/nikeplusC.jpg")}
+            source={require("../../assets/nikeplusC.jpg")}
             style={style.imageSV}
           />
         </View>
         <View style={style.cMView}>
           <Image
-            source={require("../../../assets/nikeplusLS.jpg")}
+            source={require("../../assets/nikeplusLS.jpg")}
             style={style.imageSV}
           />
         </View>
         <View style={style.cMView}>
           <Image
-            source={require("../../../assets/nikeplusT.jpg")}
+            source={require("../../assets/nikeplusT.jpg")}
             style={style.imageSV}
           />
-        </View>
+        </View> */}
+        <Text>{nome}</Text>
+        <Text>{marca}</Text>
+        <Text>{cor}</Text>
+        <Text>{preco}</Text>
         <TouchableOpacity style={style.btn} onPress={handleClose}>
-          <Text style={style.textobtn}>X</Text>
+          <Text style={style.textobtn}>Cancelar</Text>
         </TouchableOpacity>
-        <TouchableOpacity style={style.btn} onPress={handleComprar}>
-          <Text style={style.textobtn}>Comprar</Text>
+        <TouchableOpacity style={style.btn} onPress={handleSalvar}>
+          <Text style={style.textobtn}>Salvar</Text>
         </TouchableOpacity>
       </ScrollView>
     </SafeAreaView>

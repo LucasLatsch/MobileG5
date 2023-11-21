@@ -56,7 +56,7 @@ export default function Sobre() {
       <FlatList
         data={DATA}
         renderItem={Item}
-        keyExtractor={(item) => item.title}
+        keyExtractor={(item) => item.id}
       />
     </View>
   );

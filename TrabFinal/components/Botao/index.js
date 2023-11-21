@@ -4,7 +4,7 @@ import React from "react";
 export default function Botao(props) {
   return (
     <View style={styles.container}>
-      <TouchableOpacity>
+      <TouchableOpacity onPress={props.acao}>
         <Text style={styles.texto}>{props.texto}</Text>
       </TouchableOpacity>
     </View>

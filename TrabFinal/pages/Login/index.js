@@ -10,12 +10,16 @@ export default function Login() {
   const navigation = useNavigation();
 
   const NavLogin = () => {
-    if (username === "usuario" && password === "senha") {
-      console.warn("Login bem-sucedido!");
+    if (username === "Lucas" && password === "123456") {
+      setPassword("");
+      setUsername("");
+      alert("Login bem-sucedido!");
+
+      // limpar o terminal apos login
+
       navigation.navigate("Home");
     } else if (username === "" && password === "") {
-      // alert("Campos vazios!. Tente novamente.");
-      console.log("Login bem-sucedido!");
+      alert("Campos vazios!. Tente novamente.");
     } else {
       alert("Credenciais invalidas. Tente novamente.");
     }
@@ -34,14 +38,15 @@ export default function Login() {
         <MeuInput
           label="Login"
           placeholder="Ex@gmail.com"
-          onChangeText={setUsername}
+          setValor={setUsername}
         />
         <MeuInput
           label="Senha"
           placeholder="*****"
-          onChangeText={setPassword}
+          comMascara={true}
+          setValor={setPassword}
         />
-        <Botao texto="Entrar" onPress={NavLogin} />
+        <Botao texto="Entrar" acao={NavLogin} />
         <Botao texto="Cadastrar" />
       </View>
     </View>

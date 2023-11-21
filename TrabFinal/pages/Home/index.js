@@ -10,12 +10,90 @@ import {
   Animated,
   StatusBar,
   Modal,
+  FlatList,
 } from "react-native";
 import React, { useState, useRef } from "react";
 import CustomScroll from "../../components/CustomScroll";
 import ModalComponent from "../../components/Modal";
 
+const DATA = [
+  {
+    id: "1",
+    nome: "Slipstrean",
+    marca: "Puma",
+    cor: "Branco/Azul",
+    preco: "R$399,99",
+    imagem: require("../../assets/PumaSlips.jpg"),
+  },
+  {
+    id: "2",
+    nome: "Dunk Low Panda",
+    marca: "Nike",
+    cor: "Branco/Preto",
+    preco: "R$999,99",
+    imagem: require("../../assets/NikePanda.jpg"),
+  },
+  {
+    id: "3",
+    nome: "Converse",
+    marca: "Converse",
+    cor: "Verde",
+    preco: "R$299,99",
+    imagem: require("../../assets/converse.jpg"),
+  },
+  {
+    id: "4",
+    nome: "Wavy",
+    marca: "Vans",
+    cor: "Branco",
+    preco: "R$599,99",
+    imagem: require("../../assets/vanswavyeshoe.jpg"),
+  },
+  {
+    id: "5",
+    nome: "Air Force 1 Coff",
+    marca: "Nike",
+    cor: "Bege",
+    preco: "R$799,99",
+    imagem: require("../../assets/nikeplusF.jpg"),
+  },
+  {
+    id: "6",
+    nome: "Air Force 1 Coff",
+    marca: "Nike",
+    cor: "Marrom",
+    preco: "R$799,99",
+    imagem: require("../../assets/nikeplusF.jpg"),
+  },
+];
+
 export default function Home() {
+  const Item = ({ item }) => (
+    <>
+      <TouchableOpacity onPress={() => setExibirModal(true)}>
+        <View style={style.item}>
+          <Image style={style.img} source={item.imagem} />
+          <View>
+            <Text style={style.email}>{item.nome}</Text>
+            <Text style={style.email}>{item.marca}</Text>
+            <Text style={style.email}>{item.cor}</Text>
+            <Text style={style.email}>{item.preco}</Text>
+          </View>
+        </View>
+      </TouchableOpacity>
+      <Modal visible={exibirModal} transparent={true}>
+        <ModalComponent
+          handleClose={() => setExibirModal(false)}
+          handleSalvar={() => alert("Produto salvo com sucesso")}
+          nome={item.nome}
+          marca={item.marca}
+          cor={item.cor}
+          preco={item.preco}
+        />
+      </Modal>
+    </>
+  );
+
   const scrollY = useRef(new Animated.Value(0)).current;
   const [searchBarFocused, setSearchBarFocused] = useState(false);
   const [exibirModal, setExibirModal] = useState(false);
@@ -82,81 +160,35 @@ export default function Home() {
         >
           <View style={style.card}>
             <Image
-              source={require("../../../assets/ascis.jpg")}
+              source={require("../../assets/ascis.jpg")}
               style={style.image}
             />
           </View>
           <View style={style.card}>
             <Image
-              source={require("../../../assets/newBalance.jpg")}
+              source={require("../../assets/newBalance.jpg")}
               style={style.image}
             />
           </View>
           <View style={style.card}>
             <Image
-              source={require("../../../assets/jordanroxo.jpg")}
+              source={require("../../assets/jordanroxo.jpg")}
               style={style.image}
             />
           </View>
           <View style={style.card}>
             <Image
-              source={require("../../../assets/adidas.jpg")}
+              source={require("../../assets/adidas.jpg")}
               style={style.image}
             />
           </View>
         </ScrollView>
-        <View style={style.cardV}>
-          <Image
-            source={require("../../../assets/PumaSlips.jpg")}
-            style={style.imageSV}
+        <View style={style.container}>
+          <FlatList
+            data={DATA}
+            renderItem={Item}
+            keyExtractor={(item) => item.id}
           />
-          <Text style={style.cardVText}>
-            Puma Slipstrean R$399,99 {"\n"} Cor: Branco/Azul
-          </Text>
-        </View>
-        <View style={style.cardV}>
-          <Image
-            source={require("../../../assets/NikePanda.jpg")}
-            style={style.imageSV}
-          />
-          <Text style={style.cardVText}>
-            Nike Dunk Low Panda R$999,99 {"\n"} Cor: Branco/Preto
-          </Text>
-        </View>
-        <View style={style.cardV}>
-          <Image
-            source={require("../../../assets/converse.jpg")}
-            style={style.imageSV}
-          />
-          <Text style={style.cardVText}>
-            Converse R$299,99 {"\n"} Cor: Verde
-          </Text>
-        </View>
-        <View style={style.cardV}>
-          <Image
-            source={require("../../../assets/vanswavyeshoe.jpg")}
-            style={style.imageSV}
-          />
-          <Text style={style.cardVText}>
-            Vans wavy R$599,99 {"\n"} Cor: Branco
-          </Text>
-        </View>
-        <View style={style.cardV}>
-          <TouchableOpacity onPress={() => setExibirModal(true)}>
-            <Image
-              source={require("../../../assets/nikeplusF.jpg")}
-              style={style.imageSV}
-            />
-            <Text style={style.cardVText}>
-              Nike Air Force 1 Coffee R$799,99 {"\n"} Cor: Beje
-            </Text>
-            <Modal visible={exibirModal} transparent={true}>
-              <ModalComponent
-                handleClose={() => setExibirModal(false)}
-                handleComprar={() => alert("Clicou em Comprar")}
-              />
-            </Modal>
-          </TouchableOpacity>
         </View>
       </ScrollView>
     </SafeAreaView>
@@ -248,5 +280,25 @@ const style = StyleSheet.create({
   },
   searchIcon: {
     marginLeft: 16,
+  },
+  item: {
+    backgroundColor: "#F9F9F9",
+    padding: 20,
+    marginVertical: 8,
+    marginHorizontal: 16,
+    flexDirection: "row",
+    alignItems: "center",
+    gap: 30,
+  },
+  nome: {
+    fontSize: 32,
+  },
+  email: {
+    fontSize: 15,
+  },
+  img: {
+    borderRadius: 25,
+    width: 100,
+    height: 100,
   },
 });
