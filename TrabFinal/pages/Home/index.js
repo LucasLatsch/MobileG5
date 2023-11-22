@@ -73,6 +73,7 @@ const Home = () => {
   const [exibirModal, setExibirModal] = useState(false);
   const [itemSelecionado, setItemSelecionado] = useState(null);
   const [produto, setProduto] = useState([]);
+  const [cadastro, setCadastro] = useState(true);
 
   const getProduto = async () => {
     try {
@@ -153,7 +154,10 @@ const Home = () => {
           handleClose={() => setExibirModal(false)}
           handleSalvar={handleSalvar}
           handleDeletar={handleDeletar}
+          handleCadastrar={handleCadastrar}
           result={itemSelecionado}
+          cadastro={cadastro}
+          setCadastro={setCadastro}
           {...itemSelecionado}
         />
       </Modal>
@@ -173,19 +177,38 @@ const Home = () => {
     }
   };
   const handleItemPress = (item) => {
+    setCadastro(false);
     console.log("Item selecionado:", item);
     setItemSelecionado(item);
     setExibirModal(true);
   };
 
-  const handleSalvar = async (valores) => {
+  const handlePress = () => {
+    setCadastro(true);
+    console.log("Nenhum Item selecionado:");
+    setExibirModal(true);
+  };
+
+  const handleSalvar = async (id, valores) => {
     try {
-      const resposta = await axios.post(url, valores);
-      const addProduto = resposta.data;
-      setItemSelecionado(addProduto);
-      console.log(DATA);
-      getProduto();
       setExibirModal(false);
+      console.log("Atualizar produto: " + id);
+      const { data } = await axios.put(`${url}/${id}`, valores);
+      console.log(data);
+      getProduto();
+      // console.log(produto);
+    } catch (error) {
+      console.log(error);
+    }
+  };
+
+  const handleCadastrar = async (valores) => {
+    try {
+      setExibirModal(false);
+      console.log("Criando novo produto");
+      const { data } = await axios.post(url, valores);
+      console.log(data);
+      getProduto();
       // console.log(produto);
     } catch (error) {
       console.log(error);
@@ -204,7 +227,7 @@ const Home = () => {
       <ScrollView vertical style={styles.scrollV} scrollEventThrottle={16}>
         <View style={styles.container}>
           <View style={styles.btn}>
-            <Botao texto="Cadastrar" acao={handleItemPress} />
+            <Botao texto="Cadastrar" acao={handlePress} />
           </View>
           <FlatList
             data={produto}

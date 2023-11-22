@@ -14,7 +14,10 @@ const ModalComponent = ({
   handleClose,
   handleSalvar,
   handleDeletar,
+  handleCadastrar,
   result,
+  cadastro,
+  setCadastro,
 }) => {
   // console.log("Props recebidas na modal:", { nome, marca, cor, preco, imagem });
   const [imagem, setImagem] = useState(result.imagem ? result.imagem : "");
@@ -31,7 +34,6 @@ const ModalComponent = ({
   );
 
   const renderizarImagem = () => {
-    // Verifica se a URL da imagem está presente
     if (imagem) {
       return <Image source={imagem} style={styles.imageSV} />;
     } else {
@@ -39,6 +41,58 @@ const ModalComponent = ({
         <View style={styles.placeholder}>
           <Text>Imagem não disponível</Text>
         </View>
+      );
+    }
+  };
+
+  const renderizarBotão = () => {
+    if (cadastro) {
+      return (
+        <TouchableOpacity
+          style={styles.btn}
+          onPress={() =>
+            handleCadastrar({
+              imagem,
+              nome,
+              marca,
+              cor,
+              classi,
+              review,
+              precoIni,
+              precoFin,
+            })
+          }
+        >
+          <Text style={styles.textobtn}>Cadastrar</Text>
+        </TouchableOpacity>
+      );
+    } else {
+      return (
+        <>
+          <TouchableOpacity
+            style={styles.btn}
+            onPress={() =>
+              handleSalvar(result.id, {
+                imagem,
+                nome,
+                marca,
+                cor,
+                classi,
+                review,
+                precoIni,
+                precoFin,
+              })
+            }
+          >
+            <Text style={styles.textobtn}>Salvar</Text>
+          </TouchableOpacity>
+          <TouchableOpacity
+            style={styles.btn}
+            onPress={() => handleDeletar(result.id)}
+          >
+            <Text style={styles.textobtn}>Deletar</Text>
+          </TouchableOpacity>
+        </>
       );
     }
   };
@@ -121,29 +175,7 @@ const ModalComponent = ({
             />
           </View>
           <View style={styles.containerbtn}>
-            <TouchableOpacity
-              style={styles.btn}
-              onPress={() =>
-                handleSalvar(result.id, {
-                  imagem,
-                  nome,
-                  marca,
-                  cor,
-                  classi,
-                  review,
-                  precoIni,
-                  precoFin,
-                })
-              }
-            >
-              <Text style={styles.textobtn}>Salvar</Text>
-            </TouchableOpacity>
-            <TouchableOpacity
-              style={styles.btn}
-              onPress={() => handleDeletar(result.id)}
-            >
-              <Text style={styles.textobtn}>Deletar</Text>
-            </TouchableOpacity>
+            {renderizarBotão(cadastro)}
             <TouchableOpacity style={styles.btn} onPress={handleClose}>
               <Text style={styles.textobtn}>Cancelar</Text>
             </TouchableOpacity>
