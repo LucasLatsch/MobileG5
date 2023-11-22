@@ -1,4 +1,4 @@
-import React from "react";
+import { React, useState } from "react";
 import {
   SafeAreaView,
   ScrollView,
@@ -14,14 +14,17 @@ const ModalComponent = ({
   handleClose,
   handleSalvar,
   handleDeletar,
-  nome,
-  marca,
-  cor,
-  preco,
-  imagem,
   result,
 }) => {
   // console.log("Props recebidas na modal:", { nome, marca, cor, preco, imagem });
+  const [imagem, setImagem] = useState(result.imagem || "");
+  const [nome, setNome] = useState(result.nome || "");
+  const [marca, setMarca] = useState(result.marca || "");
+  const [cor, setCor] = useState(result.cor || "");
+  const [classi, setClassi] = useState(result.classi || "");
+  const [review, setReview] = useState(result.review || "");
+  const [precoIni, setPrecoIni] = useState(result.precoIni || "");
+  const [precoFin, setPrecoFin] = useState(result.precoFin || "");
 
   const renderizarImagem = () => {
     // Verifica se a URL da imagem está presente
@@ -47,7 +50,7 @@ const ModalComponent = ({
               style={styles.input}
               value={imagem}
               placeholder="Digite o nome do produto"
-              onChangeText={(imagem) => setValor(imagem)}
+              onChangeText={(imagem) => setImagem(imagem)}
             />
           </View>
           <View style={styles.containertext}>
@@ -56,7 +59,7 @@ const ModalComponent = ({
               style={styles.input}
               value={nome}
               placeholder="Digite o nome do produto"
-              onChangeText={(nome) => setValor(nome)}
+              onChangeText={(nome) => setNome(nome)}
             />
           </View>
           <View style={styles.containertext}>
@@ -65,7 +68,7 @@ const ModalComponent = ({
               style={styles.input}
               value={marca}
               placeholder="Digite o nome do produto"
-              onChangeText={(marca) => setValor(marca)}
+              onChangeText={(marca) => setMarca(marca)}
             />
           </View>
           <View style={styles.containertext}>
@@ -74,20 +77,50 @@ const ModalComponent = ({
               style={styles.input}
               value={cor}
               placeholder="Digite o nome do produto"
-              onChangeText={(cor) => setValor(cor)}
+              onChangeText={(cor) => setCor(cor)}
             />
           </View>
           <View style={styles.containertext}>
             <Text>Preço do Produto</Text>
             <TextInput
               style={styles.input}
-              value={preco}
+              value={classi}
               placeholder="Digite o nome do produto"
-              onChangeText={(preco) => setValor(preco)}
+              onChangeText={(classi) => setClassi(classi)}
+            />
+          </View>
+          <View style={styles.containertext}>
+            <Text>Preço do Produto</Text>
+            <TextInput
+              style={styles.input}
+              value={review}
+              placeholder="Digite o nome do produto"
+              onChangeText={(review) => setReview(review)}
+            />
+          </View>
+          <View style={styles.containertext}>
+            <Text>Preço do Produto</Text>
+            <TextInput
+              style={styles.input}
+              value={precoIni}
+              placeholder="Digite o nome do produto"
+              onChangeText={(precoIni) => setPrecoIni(precoIni)}
+            />
+          </View>
+          <View style={styles.containertext}>
+            <Text>Preço do Produto</Text>
+            <TextInput
+              style={styles.input}
+              value={precoFin}
+              placeholder="Digite o nome do produto"
+              onChangeText={(precoFin) => setPrecoFin(precoFin)}
             />
           </View>
           <View style={styles.containerbtn}>
-            <TouchableOpacity style={styles.btn} onPress={handleSalvar}>
+            <TouchableOpacity
+              style={styles.btn}
+              onPress={() => handleSalvar(result.id)}
+            >
               <Text style={styles.textobtn}>Salvar</Text>
             </TouchableOpacity>
             <TouchableOpacity

@@ -151,7 +151,7 @@ const Home = () => {
       <Modal visible={exibirModal} transparent={true}>
         <ModalComponent
           handleClose={() => setExibirModal(false)}
-          handleSalvar={atualizarProdutos}
+          handleSalvar={handleSalvar}
           handleDeletar={handleDeletar}
           result={itemSelecionado}
           {...itemSelecionado}
@@ -176,20 +176,21 @@ const Home = () => {
     setItemSelecionado(item);
     setExibirModal(true);
   };
-  const atualizarProdutos = async (id) => {
+  const handleSalvar = async (id) => {
     const produto = {
-      imagem: "a",
-      nome: "a",
-      classi: "a",
-      review: "a",
-      precoIni: "a",
-      precoFin: "a",
-      marca: "a",
-      cor: "a",
-      categoria: "a",
+      imagem: imagem,
+      nome: nome,
+      marca: marca,
+      cor: cor,
+      classi: classi,
+      review: review,
+      precoIni: precoIni,
+      precoFin: precoFin,
     };
     try {
-      const { data } = await axios.put(`${url}/${id}`, produto);
+      setExibirModal(false);
+      console.log("Atualizar produto: " + id);
+      const { data } = await axios.put(`${url}/${id}`);
     } catch (error) {
       console.log(error);
     }
