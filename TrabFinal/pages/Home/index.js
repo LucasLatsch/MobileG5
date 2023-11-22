@@ -164,7 +164,7 @@ const Home = () => {
     try {
       setExibirModal(false);
       const { data } = await axios.delete(`${url}/${id}`);
-      console.log(data);
+
       // const novoArray = produto.filter((item) => item.id != id);
       // setProduto(novoArray);
       getProduto();
@@ -177,13 +177,15 @@ const Home = () => {
     setItemSelecionado(item);
     setExibirModal(true);
   };
-  const handleSalvar = async (id, valores) => {
+
+  const handleSalvar = async (valores) => {
     try {
-      setExibirModal(false);
-      console.log("Atualizar produto: " + id);
-      const { data } = await axios.put(`${url}/${id}`, valores);
-      console.log(data);
+      const resposta = await axios.post(url, valores);
+      const addProduto = resposta.data;
+      setItemSelecionado(addProduto);
+      console.log(DATA);
       getProduto();
+      setExibirModal(false);
       // console.log(produto);
     } catch (error) {
       console.log(error);

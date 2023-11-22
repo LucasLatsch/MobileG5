@@ -53,7 +53,7 @@ const ModalComponent = ({
             <TextInput
               style={styles.input}
               value={imagem}
-              placeholder="Digite o nome do produto"
+              placeholder="Digite o URL do produto"
               onChangeText={(imagem) => setImagem(imagem)}
             />
           </View>
@@ -71,7 +71,7 @@ const ModalComponent = ({
             <TextInput
               style={styles.input}
               value={marca}
-              placeholder="Digite o nome do produto"
+              placeholder="Digite a marca do produto"
               onChangeText={(marca) => setMarca(marca)}
             />
           </View>
@@ -80,25 +80,25 @@ const ModalComponent = ({
             <TextInput
               style={styles.input}
               value={cor}
-              placeholder="Digite o nome do produto"
+              placeholder="Digite a cor do produto"
               onChangeText={(cor) => setCor(cor)}
             />
           </View>
           <View style={styles.containertext}>
-            <Text>Preço do Produto</Text>
+            <Text>Classificação do Produto</Text>
             <TextInput
               style={styles.input}
               value={classi}
-              placeholder="Digite o nome do produto"
+              placeholder="Digite a classificaçao do produto"
               onChangeText={(classi) => setClassi(classi)}
             />
           </View>
           <View style={styles.containertext}>
-            <Text>Preço do Produto</Text>
+            <Text>Review do Produto</Text>
             <TextInput
               style={styles.input}
               value={review}
-              placeholder="Digite o nome do produto"
+              placeholder="Review do produto"
               onChangeText={(review) => setReview(review)}
             />
           </View>
@@ -107,16 +107,16 @@ const ModalComponent = ({
             <TextInput
               style={styles.input}
               value={precoIni}
-              placeholder="Digite o nome do produto"
+              placeholder="Digite o preço do produto"
               onChangeText={(precoIni) => setPrecoIni(precoIni)}
             />
           </View>
           <View style={styles.containertext}>
-            <Text>Preço do Produto</Text>
+            <Text>Preço do Produto com desconto</Text>
             <TextInput
               style={styles.input}
               value={precoFin}
-              placeholder="Digite o nome do produto"
+              placeholder="Digite o preço do produto com desconto"
               onChangeText={(precoFin) => setPrecoFin(precoFin)}
             />
           </View>
