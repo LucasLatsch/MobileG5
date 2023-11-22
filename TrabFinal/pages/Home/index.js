@@ -165,8 +165,9 @@ const Home = () => {
       setExibirModal(false);
       const { data } = await axios.delete(`${url}/${id}`);
       console.log(data);
-      const novoArray = produto.filter((item) => item.id != id);
-      setProduto(novoArray);
+      // const novoArray = produto.filter((item) => item.id != id);
+      // setProduto(novoArray);
+      getProduto();
     } catch (error) {
       console.log(error);
     }
@@ -176,21 +177,14 @@ const Home = () => {
     setItemSelecionado(item);
     setExibirModal(true);
   };
-  const handleSalvar = async (id) => {
-    const produto = {
-      imagem: imagem,
-      nome: nome,
-      marca: marca,
-      cor: cor,
-      classi: classi,
-      review: review,
-      precoIni: precoIni,
-      precoFin: precoFin,
-    };
+  const handleSalvar = async (id, valores) => {
     try {
       setExibirModal(false);
       console.log("Atualizar produto: " + id);
-      const { data } = await axios.put(`${url}/${id}`);
+      const { data } = await axios.put(`${url}/${id}`, valores);
+      console.log(data);
+      getProduto();
+      // console.log(produto);
     } catch (error) {
       console.log(error);
     }

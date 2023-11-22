@@ -17,14 +17,18 @@ const ModalComponent = ({
   result,
 }) => {
   // console.log("Props recebidas na modal:", { nome, marca, cor, preco, imagem });
-  const [imagem, setImagem] = useState(result.imagem || "");
-  const [nome, setNome] = useState(result.nome || "");
-  const [marca, setMarca] = useState(result.marca || "");
-  const [cor, setCor] = useState(result.cor || "");
-  const [classi, setClassi] = useState(result.classi || "");
-  const [review, setReview] = useState(result.review || "");
-  const [precoIni, setPrecoIni] = useState(result.precoIni || "");
-  const [precoFin, setPrecoFin] = useState(result.precoFin || "");
+  const [imagem, setImagem] = useState(result.imagem ? result.imagem : "");
+  const [nome, setNome] = useState(result.nome ? result.nome : "");
+  const [marca, setMarca] = useState(result.marca ? result.marca : "");
+  const [cor, setCor] = useState(result.cor ? result.cor : "");
+  const [classi, setClassi] = useState(result.classi ? result.classi : "");
+  const [review, setReview] = useState(result.review ? result.review : "");
+  const [precoIni, setPrecoIni] = useState(
+    result.precoIni ? result.precoIni : ""
+  );
+  const [precoFin, setPrecoFin] = useState(
+    result.precoFin ? result.precoFin : ""
+  );
 
   const renderizarImagem = () => {
     // Verifica se a URL da imagem está presente
@@ -119,7 +123,18 @@ const ModalComponent = ({
           <View style={styles.containerbtn}>
             <TouchableOpacity
               style={styles.btn}
-              onPress={() => handleSalvar(result.id)}
+              onPress={() =>
+                handleSalvar(result.id, {
+                  imagem,
+                  nome,
+                  marca,
+                  cor,
+                  classi,
+                  review,
+                  precoIni,
+                  precoFin,
+                })
+              }
             >
               <Text style={styles.textobtn}>Salvar</Text>
             </TouchableOpacity>

@@ -1,60 +1,56 @@
-import { View, Text, FlatList, StyleSheet, Image } from "react-native";
-import React from "react";
-
-const DATA = [
-  {
-    id: "bd7acbea-c1b1-46c2-aed5-3ad53abb28ba",
-    nome: "Lucas",
-    email: "lucas@gmail.com",
-    imagem: "https://avatars.githubusercontent.com/u/141193394?v=4",
-  },
-  {
-    id: "3ac68afc-c605-48d3-a4f8-fbd91aa97f63",
-    nome: "Liliane",
-    email: "liliane@gmail.com",
-    imagem: "https://avatars.githubusercontent.com/u/117579849?v=4",
-  },
-  {
-    id: "58694a0f-3da1-471f-bd96-145571e29d72",
-    nome: "Jose",
-    email: "jose@gmail.com",
-    imagem: "https://avatars.githubusercontent.com/u/106778374?v=4",
-  },
-  {
-    id: "58694a0f-3da1-471f-bd96-145571e29d73",
-    nome: "Matheus",
-    email: "matheus@gmail.com",
-    imagem: "https://avatars.githubusercontent.com/u/141193943?v=4",
-  },
-  {
-    id: "58694a0f-3da1-471f-bd96-145571e29d74",
-    nome: "Edu",
-    email: "edu@gmail.com",
-    imagem: "https://avatars.githubusercontent.com/u/141246270?v=4",
-  },
-  {
-    id: "58694a0f-3da1-471f-bd96-145571e29d75",
-    nome: "Paloma",
-    email: "paloma@gmail.com",
-    imagem: "https://avatars.githubusercontent.com/u/141692596?v=4",
-  },
-];
-
-const Item = ({ item }) => (
-  <View style={styles.item}>
-    <Image style={styles.img} source={{ uri: item.imagem }} />
-    <View>
-      <Text style={styles.nome}>{item.nome}</Text>
-      <Text style={styles.email}>{item.email}</Text>
-    </View>
-  </View>
-);
+import {
+  View,
+  Text,
+  FlatList,
+  StyleSheet,
+  Image,
+  TouchableOpacity,
+  Linking,
+} from "react-native";
+import React, { useEffect, useState } from "react";
+import axios from "axios";
 
 export default function Sobre() {
+  const [userData, setUserData] = useState([]);
+
+  const Item = ({ item }) => (
+    <View style={styles.item}>
+      <TouchableOpacity onPress={() => handleEmailPress(item.login)}>
+        <Image style={styles.img} source={{ uri: item.avatar_url }} />
+      </TouchableOpacity>
+      <View>
+        <Text style={styles.nome}>{item.login}</Text>
+      </View>
+    </View>
+  );
+
+  const handleEmailPress = (email) => {
+    const url = `https://github.com/${email}`;
+    Linking.openURL(url);
+  };
+
+  useEffect(() => {
+    const getData = async () => {
+      try {
+        const owner = "LucasLatsch";
+        const repoName = "MobileG5";
+        const response = await axios.get(
+          `https://api.github.com/repos/${owner}/${repoName}/contributors`
+        );
+        const data = response.data;
+        console.log(data);
+        setUserData(data);
+      } catch (error) {
+        console.error("Error fetching data: ", error);
+      }
+    };
+
+    getData();
+  }, []);
   return (
     <View style={styles.container}>
       <FlatList
-        data={DATA}
+        data={userData}
         renderItem={Item}
         keyExtractor={(item) => item.id}
       />
