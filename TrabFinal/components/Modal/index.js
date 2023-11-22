@@ -19,6 +19,7 @@ const ModalComponent = ({
   cor,
   preco,
   imagem,
+  result,
 }) => {
   // console.log("Props recebidas na modal:", { nome, marca, cor, preco, imagem });
 
@@ -89,7 +90,10 @@ const ModalComponent = ({
             <TouchableOpacity style={styles.btn} onPress={handleSalvar}>
               <Text style={styles.textobtn}>Salvar</Text>
             </TouchableOpacity>
-            <TouchableOpacity style={styles.btn} onPress={handleDeletar}>
+            <TouchableOpacity
+              style={styles.btn}
+              onPress={() => handleDeletar(result.id)}
+            >
               <Text style={styles.textobtn}>Deletar</Text>
             </TouchableOpacity>
             <TouchableOpacity style={styles.btn} onPress={handleClose}>

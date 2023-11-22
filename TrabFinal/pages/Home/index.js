@@ -12,10 +12,11 @@ import {
   Modal,
   FlatList,
   View,
-  axios,
 } from "react-native";
+import axios from "axios";
 import ModalComponent from "../../components/Modal";
 import Botao from "../../components/Botao";
+import { Ionicons } from "@expo/vector-icons";
 
 const DATA = [
   {
@@ -88,6 +89,48 @@ const Home = () => {
     getProduto();
   }, []);
 
+  function defineStar(classi) {
+    switch (classi) {
+      case "1":
+        return <Ionicons name="star" color={"#FFD200"} />;
+      case "2":
+        return (
+          <View style={styles.star}>
+            <Ionicons name="star" color={"#FFD200"} />
+            <Ionicons name="star" color={"#FFD200"} />
+          </View>
+        );
+      case "3":
+        return (
+          <View style={styles.star}>
+            <Ionicons name="star" color={"#FFD200"} />
+            <Ionicons name="star" color={"#FFD200"} />
+            <Ionicons name="star" color={"#FFD200"} />
+          </View>
+        );
+      case "4":
+        return (
+          <View style={styles.star}>
+            <Ionicons name="star" color={"#FFD200"} />
+            <Ionicons name="star" color={"#FFD200"} />
+            <Ionicons name="star" color={"#FFD200"} />
+            <Ionicons name="star" color={"#FFD200"} />
+          </View>
+        );
+      case "5":
+        return (
+          <View style={styles.star}>
+            <Ionicons name="star" color={"#FFD200"} />
+            <Ionicons name="star" color={"#FFD200"} />
+            <Ionicons name="star" color={"#FFD200"} />
+            <Ionicons name="star" color={"#FFD200"} />
+            <Ionicons name="star" color={"#FFD200"} />
+          </View>
+        );
+      default:
+        return;
+    }
+  }
   const Item = ({ item }) => (
     <>
       <TouchableOpacity onPress={() => handleItemPress(item)}>
@@ -97,7 +140,11 @@ const Home = () => {
             <Text style={styles.email}>{item.nome}</Text>
             <Text style={styles.email}>{item.marca}</Text>
             <Text style={styles.email}>{item.cor}</Text>
-            <Text style={styles.email}>{item.preco}</Text>
+            {/* <Text style={styles.email}>{item.classi}</Text> */}
+            {defineStar(item.classi)}
+            <Text style={styles.email}>{item.review}</Text>
+            <Text style={styles.email1}>${item.precoIni}</Text>
+            <Text style={styles.email}>{item.precoFin}</Text>
           </View>
         </View>
       </TouchableOpacity>
@@ -106,14 +153,16 @@ const Home = () => {
           handleClose={() => setExibirModal(false)}
           handleSalvar={atualizarProdutos}
           handleDeletar={handleDeletar}
+          result={itemSelecionado}
           {...itemSelecionado}
         />
       </Modal>
     </>
   );
   const handleDeletar = async (id) => {
-    console.log("Excluir produto: ", id);
+    console.log("Excluir produto: " + id);
     try {
+      setExibirModal(false);
       const { data } = await axios.delete(`${url}/${id}`);
       console.log(data);
       const novoArray = produto.filter((item) => item.id != id);
@@ -161,9 +210,9 @@ const Home = () => {
             <Botao texto="Cadastrar" acao={handleItemPress} />
           </View>
           <FlatList
-            data={DATA}
+            data={produto}
             renderItem={({ item }) => <Item item={item} />}
-            keyExtractor={(item) => item.id}
+            keyExtractor={(item) => item.id.toString()}
           />
         </View>
       </ScrollView>
@@ -184,6 +233,9 @@ const styles = StyleSheet.create({
     flex: 1,
     backgroundColor: "#000000",
   },
+  star: {
+    flexDirection: "row",
+  },
   item: {
     backgroundColor: "#F9F9F9",
     padding: 20,
@@ -200,6 +252,10 @@ const styles = StyleSheet.create({
   },
   email: {
     fontSize: 15,
+  },
+  email1: {
+    fontSize: 15,
+    textDecorationLine: "line-through",
   },
   scrollV: {
     flex: 1,
