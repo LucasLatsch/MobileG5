@@ -144,8 +144,8 @@ const Home = () => {
             {/* <Text style={styles.email}>{item.classi}</Text> */}
             {defineStar(item.classi)}
             <Text style={styles.email}>{item.review}</Text>
-            <Text style={styles.email1}>${item.precoIni}</Text>
-            <Text style={styles.email}>{item.precoFin}</Text>
+            <Text style={styles.email1}>R${item.precoIni}</Text>
+            <Text style={styles.email}>R${item.precoFin}</Text>
           </View>
         </View>
       </TouchableOpacity>
@@ -187,6 +187,7 @@ const Home = () => {
     setCadastro(true);
     console.log("Nenhum Item selecionado:");
     setExibirModal(true);
+    setItemSelecionado("");
   };
 
   const handleSalvar = async (id, valores) => {
