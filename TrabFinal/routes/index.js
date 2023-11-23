@@ -10,11 +10,15 @@ const Drawer = createDrawerNavigator();
 export default function AppRouter() {
   return (
     <Drawer.Navigator>
-      <Drawer.Screen name="Animação" component={SplashScreen} />
+      <Drawer.Screen
+        name="Animação"
+        component={SplashScreen}
+        options={{ headerShown: false, drawerLabel: () => null }}
+      />
       <Drawer.Screen
         name="Login"
         component={Login}
-        options={{ headerShown: true }}
+        options={{ headerShown: true, drawerIcon: "" }}
       />
       <Drawer.Screen name="Pagina inicial" component={Home} />
       <Drawer.Screen name="Integrantes" component={Sobre} />

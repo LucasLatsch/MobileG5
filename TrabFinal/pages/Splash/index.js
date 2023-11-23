@@ -1,44 +1,50 @@
 import React, { useEffect, useRef } from "react";
-import { View, StyleSheet, Button } from "react-native";
-import LottieView from "lottie-react-native";
+import lottie from "lottie-web";
+import { useNavigation } from "@react-navigation/native";
+import animationData from "../../assets/Animation_-_1700331134011.json"; // Importe o arquivo JSON da animação
+import { View } from "react-native";
 
-export default function SplashScreen() {
-  const animation = useRef(null);
-  useEffect(() => {}, []);
+const LottieAnimation = () => {
+  const containerRef = useRef(null);
+  const navigation = useNavigation();
+
+  //! Arquivo de animação para web
+
+  useEffect(() => {
+    if (containerRef.current) {
+      const anim = lottie.loadAnimation({
+        container: containerRef.current,
+        renderer: "svg",
+        loop: false,
+        autoplay: true,
+        animationData: animationData, // Use o arquivo JSON importado como animationData
+      });
+
+      anim.addEventListener("complete", () => {
+        // Navega para outra tela após a conclusão da animação
+        navigation.navigate("Login"); // Substitua 'OutraTela' pelo nome da tela de destino
+      });
+    }
+  }, [navigation]);
 
   return (
-    <View style={styles.animationContainer}>
-      <LottieView
-        autoPlay
-        ref={animation}
+    <View
+      style={{
+        alignItems: "center",
+        justifyContent: "center",
+      }}
+    >
+      <View
+        ref={containerRef}
         style={{
-          width: 200,
-          height: 200,
-          backgroundColor: "#eee",
+          width: "400px",
+          height: "400px",
+          alignItems: "center",
+          justifyContent: "center",
         }}
-        source={require("../../assets/assets/Animation_-_1700331134011.json")}
       />
-      <View style={styles.buttonContainer}>
-        <Button
-          title="Restart Animation"
-          onPress={() => {
-            animation.current?.reset();
-            animation.current?.play();
-          }}
-        />
-      </View>
     </View>
   );
-}
+};
 
-const styles = StyleSheet.create({
-  animationContainer: {
-    backgroundColor: "#fff",
-    alignItems: "center",
-    justifyContent: "center",
-    flex: 1,
-  },
-  buttonContainer: {
-    paddingTop: 20,
-  },
-});
+export default LottieAnimation;
