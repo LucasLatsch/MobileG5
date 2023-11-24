@@ -31,6 +31,7 @@ export default function AppRouter() {
           drawerIcon: ({ color, size }) => (
             <MaterialIcons name="person-add" size={size} color={color} />
           ),
+          drawerActiveTintColor: "#FF5722",
         }}
       />
       <Drawer.Screen
@@ -41,6 +42,7 @@ export default function AppRouter() {
           drawerIcon: ({ color, size }) => (
             <MaterialIcons name="home" size={size} color={color} />
           ),
+          drawerActiveTintColor: "#FF5722",
         }}
       />
       <Drawer.Screen
@@ -51,6 +53,7 @@ export default function AppRouter() {
           drawerIcon: ({ color, size }) => (
             <MaterialIcons name="people-alt" size={size} color={color} />
           ),
+          drawerActiveTintColor: "#FF5722",
         }}
       />
       <Drawer.Screen

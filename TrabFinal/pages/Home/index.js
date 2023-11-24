@@ -11,11 +11,13 @@ import {
   Modal,
   FlatList,
   View,
+  Dimensions,
 } from "react-native";
 import axios from "axios";
 import ModalComponent from "../../components/Modal";
 import Botao from "../../components/Botao";
 import { Ionicons } from "@expo/vector-icons";
+import Carousel from "react-native-reanimated-carousel";
 
 const url = "https://65495a57dd8ebcd4ab2483d2.mockapi.io/login";
 const Home = () => {
@@ -25,6 +27,7 @@ const Home = () => {
   const [cadastro, setCadastro] = useState(true);
   const [query, setQuery] = useState("");
   const [resultadosPesquisa, setResultadosPesquisa] = useState([]);
+  const width = Dimensions.get("window").width;
 
   const getProduto = async () => {
     try {
@@ -88,11 +91,10 @@ const Home = () => {
       <TouchableOpacity onPress={() => handleItemPress(item)}>
         <View style={styles.item}>
           <Image style={styles.img} source={item.imagem} />
-          <View numberOfLines={2}>
+          <View>
             <Text style={styles.nome}>{item.nome}</Text>
             <Text style={styles.email}>{item.marca}</Text>
             <Text style={styles.email}>{item.cor}</Text>
-            {/* <Text style={styles.email}>{item.classi}</Text> */}
             {defineStar(item.classi)}
             <Text style={styles.email}>({item.review}) Reviews</Text>
             <Text style={styles.email1}>R${item.precoIni}</Text>
@@ -119,9 +121,8 @@ const Home = () => {
     try {
       setExibirModal(false);
       const { data } = await axios.delete(`${url}/${id}`);
-
-      // const novoArray = produto.filter((item) => item.id != id);
-      // setProduto(novoArray);
+      console.log("item deletado:" + id);
+      console.log(data);
       getProduto();
     } catch (error) {
       console.log(error);
@@ -188,25 +189,56 @@ const Home = () => {
         translucent={false}
         networkActivityIndicatorVisible={true}
       />
-
       <ScrollView vertical style={styles.scrollV} scrollEventThrottle={16}>
-        <View style={styles.container}>
-          <View style={styles.search}>
-            <TextInput
-              placeholder="Pesquisar......."
-              onChangeText={handleInputChange}
-              style={styles.input}
-              value={query}
-            />
-            <Ionicons
-              name="search"
-              size={24}
-              color="#888"
-              style={{ marginRight: 0 }}
-            />
-          </View>
-          <View style={styles.btn}>
-            <Botao texto="Cadastrar" acao={handlePress} />
+        <View style={{ backgroundColor: "#fff" }}>
+          <Carousel
+            loop
+            width={width}
+            height={250}
+            autoPlay={true}
+            data={produto}
+            scrollAnimationDuration={1000}
+            onSnapToItem={(index) => console.log("current index:", index)}
+            renderItem={({ item }) => (
+              <View
+                style={{
+                  flex: 1,
+                  justifyContent: "center",
+                  alignContent: "center",
+                }}
+              >
+                <Image style={styles.imgC} source={item.imagem} />
+              </View>
+            )}
+          />
+        </View>
+        <View style={styles.containerMain}>
+          <View
+            style={{
+              flexDirection: "row",
+              justifyContent: "center",
+              gap: 10,
+              padding: 8,
+              paddingTop: 20,
+            }}
+          >
+            <View style={styles.search}>
+              <TextInput
+                placeholder="Barra de Pesquisa..."
+                onChangeText={handleInputChange}
+                style={styles.input}
+                value={query}
+              />
+              <Ionicons
+                name="search"
+                size={30}
+                color="#888"
+                style={{ marginRight: 0, marginTop: 5 }}
+              />
+            </View>
+            <View style={styles.btn}>
+              <Botao texto="Cadastrar" acao={handlePress} largura={150} />
+            </View>
           </View>
           <FlatList
             data={query.length > 0 ? resultadosPesquisa : produto}
@@ -230,7 +262,12 @@ const Home = () => {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
+    backgroundColor: "#ffffff",
+  },
+  containerMain: {
     backgroundColor: "#000000",
+    borderTopLeftRadius: 15,
+    borderTopRightRadius: 15,
   },
   star: {
     flexDirection: "row",
@@ -243,17 +280,27 @@ const styles = StyleSheet.create({
     flexDirection: "row",
     alignItems: "center",
     gap: 10,
+    borderRadius: 15,
+    shadowColor: "#fff",
+    shadowOffset: { width: -2, height: 4 },
+    shadowOpacity: 0.5,
+    shadowRadius: 3,
   },
   img: {
     borderRadius: 25,
     width: 120,
     height: 120,
   },
+  imgC: {
+    borderRadius: 25,
+    width: "width",
+    height: 250,
+  },
   email: {
     fontSize: 10,
   },
   preco: {
-    fontSize: 10,
+    fontSize: 15,
     color: "green",
   },
   nome: {
@@ -268,7 +315,7 @@ const styles = StyleSheet.create({
   },
   scrollV: {
     flex: 1,
-    backgroundColor: "#F3F3F3",
+    backgroundColor: "#ffffff",
   },
   btn: {
     alignItems: "center",
