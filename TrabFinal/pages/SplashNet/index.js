@@ -1,9 +1,8 @@
 import React, { useEffect, useRef } from "react";
 import lottie from "lottie-web";
 import { useNavigation } from "@react-navigation/native";
-import animationData from "../../assets/Animation - 1700778375765.json"; // Importe o arquivo JSON da animação
+import animationData from "../../assets/Animation - 1700778492826.json"; // Importe o arquivo JSON da animação
 import { View } from "react-native";
-
 const LottieAnimation = () => {
   const containerRef = useRef(null);
   const navigation = useNavigation();
@@ -15,14 +14,14 @@ const LottieAnimation = () => {
       const anim = lottie.loadAnimation({
         container: containerRef.current,
         renderer: "svg",
-        loop: false,
+        loop: true,
         autoplay: true,
-        animationData: animationData, // Use o arquivo JSON importado como animationData
+        animationData: animationData,
       });
 
       anim.addEventListener("complete", () => {
         // Navega para outra tela após a conclusão da animação
-        navigation.navigate("Login"); // Substitua 'OutraTela' pelo nome da tela de destino
+        navigation.navigate("Login");
       });
     }
   }, [navigation]);
@@ -31,14 +30,14 @@ const LottieAnimation = () => {
     <View
       style={{
         alignItems: "center",
-        top: 110,
+        // justifyContent: "center",
       }}
     >
       <View
         ref={containerRef}
         style={{
-          width: "480px",
-          height: "480px",
+          width: "600px",
+          height: "600px",
           alignItems: "center",
           justifyContent: "center",
         }}

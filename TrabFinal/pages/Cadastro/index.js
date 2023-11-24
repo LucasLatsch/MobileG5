@@ -4,47 +4,31 @@ import { useNavigation } from "@react-navigation/native";
 import MeuInput from "../../components/Input/index";
 import Botao from "../../components/Botao/index";
 
-export default function Login() {
+export default function Cadastro() {
   const [username, setUsername] = useState("");
   const [password, setPassword] = useState("");
+  const [passwordConf, setPasswordConf] = useState("");
   const navigation = useNavigation();
-  let loginSuccessful = false;
-
-  const NavCadastro = () => {
-    navigation.navigate("Cadastro");
-  };
 
   const NavLogin = () => {
-    const storedUsernamesJSON = localStorage.getItem("usernames");
-    const storedPasswordsJSON = localStorage.getItem("passwords");
-    const storedUsernames = storedUsernamesJSON
-      ? JSON.parse(storedUsernamesJSON)
-      : [];
-    const storedPasswords = storedPasswordsJSON
-      ? JSON.parse(storedPasswordsJSON)
-      : [];
-    for (let i = 0; i < storedUsernames.length; i++) {
-      if (username === storedUsernames[i] && password === storedPasswords[i]) {
-        setPassword("");
-        setUsername("");
-        alert("Login bem-sucedido!");
-        // limpar o terminal apos login
-
-        navigation.navigate("Pagina inicial");
-        loginSuccessful = true;
-        break;
-      }
+    const storedUsernames = [];
+    const storedPasswords = [];
+    if (username === "" || password === "" || passwordConf === "") {
+      setPassword("");
+      setPasswordConf("");
+      setUsername("");
+      alert("Campos vazios!");
+    } else {
+      alert("Cadastro Bem Sucedido!");
+      storedUsernames.push(username);
+      storedPasswords.push(password);
+      localStorage.setItem("usernames", JSON.stringify(storedUsernames));
+      localStorage.setItem("passwords", JSON.stringify(storedPasswords));
+      console.log(username);
+      console.log(password);
+      console.log(passwordConf);
+      navigation.navigate("Login");
     }
-    if (!loginSuccessful) {
-      if (username === "" || password === "") {
-        alert("Campos vazios! Por favor, preencha todos os campos.");
-      } else {
-        alert("Credenciais inválidas. Tente novamente.");
-      }
-    }
-
-    console.log(username);
-    console.log(password);
   };
 
   return (
@@ -68,8 +52,13 @@ export default function Login() {
           comMascara={true}
           setValor={setPassword}
         />
-        <Botao texto="Entrar" acao={NavLogin} />
-        <Botao texto="Cadastrar" acao={NavCadastro} />
+        <MeuInput
+          label="Confirmação da Senha"
+          placeholder="**********"
+          comMascara={true}
+          setValor={setPasswordConf}
+        />
+        <Botao texto="Cadastrar" acao={NavLogin} />
       </View>
     </View>
   );

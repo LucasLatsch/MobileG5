@@ -18,7 +18,7 @@ export default function SplashScreen() {
           height: 200,
           backgroundColor: "#eee",
         }}
-        source={require("../../assets/assets/Animation_-_1700331134011.json")}
+        source={require("../../assets/Animation - 1700778375765.json")}
       />
       <View style={styles.buttonContainer}>
         <Button

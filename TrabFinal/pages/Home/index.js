@@ -68,6 +68,7 @@ const DATA = [
     imagem: require("../../assets/nikeplusF.jpg"),
   },
 ];
+
 const url = "https://65495a57dd8ebcd4ab2483d2.mockapi.io/login";
 const Home = () => {
   const [exibirModal, setExibirModal] = useState(false);
