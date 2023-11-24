@@ -1,4 +1,4 @@
-import React, { useState, useRef, useEffect } from "react";
+import React, { useState, useEffect } from "react";
 import {
   SafeAreaView,
   ScrollView,
@@ -7,7 +7,6 @@ import {
   Image,
   TouchableOpacity,
   TextInput,
-  Animated,
   StatusBar,
   Modal,
   FlatList,
@@ -17,58 +16,6 @@ import axios from "axios";
 import ModalComponent from "../../components/Modal";
 import Botao from "../../components/Botao";
 import { Ionicons } from "@expo/vector-icons";
-import MeuInput from "../../components/Input";
-
-const DATA = [
-  {
-    id: "1",
-    nome: "Slipstream",
-    marca: "Puma",
-    cor: "Branco/Azul",
-    preco: "R$399,99",
-    imagem: require("../../assets/PumaSlips.jpg"),
-  },
-  {
-    id: "2",
-    nome: "Dunk Low Panda",
-    marca: "Nike",
-    cor: "Branco/Preto",
-    preco: "R$999,99",
-    imagem: require("../../assets/NikePanda.jpg"),
-  },
-  {
-    id: "3",
-    nome: "Converse",
-    marca: "Converse",
-    cor: "Verde",
-    preco: "R$299,99",
-    imagem: require("../../assets/converse.jpg"),
-  },
-  {
-    id: "4",
-    nome: "Wavy",
-    marca: "Vans",
-    cor: "Branco",
-    preco: "R$599,99",
-    imagem: require("../../assets/vanswavyeshoe.jpg"),
-  },
-  {
-    id: "5",
-    nome: "Air Force 1 Coff",
-    marca: "Nike",
-    cor: "Bege",
-    preco: "R$799,99",
-    imagem: require("../../assets/nikeplusF.jpg"),
-  },
-  {
-    id: "6",
-    nome: "Air Force 1 Coff",
-    marca: "Nike",
-    cor: "Marrom",
-    preco: "R$799,99",
-    imagem: require("../../assets/nikeplusF.jpg"),
-  },
-];
 
 const url = "https://65495a57dd8ebcd4ab2483d2.mockapi.io/login";
 const Home = () => {
@@ -223,8 +170,11 @@ const Home = () => {
   const handleInputChange = (text) => {
     setQuery(text);
 
-    const resultados = produto.filter((item) =>
-      item.nome.toLowerCase().includes(text.toLowerCase())
+    const resultados = produto.filter(
+      (item) =>
+        item.nome.toLowerCase().includes(text.toLowerCase()) ||
+        item.marca.toLowerCase().includes(text.toLowerCase()) ||
+        item.cor.toLowerCase().includes(text.toLowerCase())
     );
     setResultadosPesquisa(resultados);
   };
@@ -300,19 +250,19 @@ const styles = StyleSheet.create({
     height: 120,
   },
   email: {
-    fontSize: 15,
+    fontSize: 10,
   },
   preco: {
-    fontSize: 15,
+    fontSize: 10,
     color: "green",
   },
   nome: {
-    fontSize: 15,
+    fontSize: 10,
     fontWeight: "700",
     flex: 1,
   },
   email1: {
-    fontSize: 15,
+    fontSize: 10,
     textDecorationLine: "line-through",
     color: "red",
   },

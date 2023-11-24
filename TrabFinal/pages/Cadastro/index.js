@@ -10,6 +10,10 @@ export default function Cadastro() {
   const [passwordConf, setPasswordConf] = useState("");
   const navigation = useNavigation();
 
+  const NavBack = () => {
+    navigation.navigate("Login");
+  };
+
   const NavLogin = () => {
     const storedUsernames = [];
     const storedPasswords = [];
@@ -18,6 +22,11 @@ export default function Cadastro() {
       setPasswordConf("");
       setUsername("");
       alert("Campos vazios!");
+    } else if (password !== passwordConf) {
+      setPassword("");
+      setPasswordConf("");
+      setUsername("");
+      alert("Conflito entre senhas, confira e tente novamente!");
     } else {
       alert("Cadastro Bem Sucedido!");
       storedUsernames.push(username);
@@ -59,6 +68,7 @@ export default function Cadastro() {
           setValor={setPasswordConf}
         />
         <Botao texto="Cadastrar" acao={NavLogin} />
+        <Botao texto="Voltar" acao={NavBack} />
       </View>
     </View>
   );

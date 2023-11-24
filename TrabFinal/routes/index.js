@@ -16,19 +16,20 @@ export default function AppRouter() {
         name="Login"
         component={Login}
         options={{
-          headerShown: true,
-          drawerIcon: ({ focused, color, size }) => (
+          headerShown: false,
+          drawerIcon: ({ color, size }) => (
             <MaterialIcons name="login" size={size} color={color} />
           ),
+          drawerActiveTintColor: "#FF5722",
         }}
       />
       <Drawer.Screen
         name="Cadastro"
         component={Cadastro}
         options={{
-          headerShown: true,
-          drawerIcon: ({ focused, color, size }) => (
-            <MaterialIcons name="add-circle" size={size} color={color} />
+          headerShown: false,
+          drawerIcon: ({ color, size }) => (
+            <MaterialIcons name="person-add" size={size} color={color} />
           ),
         }}
       />
@@ -37,7 +38,7 @@ export default function AppRouter() {
         component={Home}
         options={{
           headerShown: true,
-          drawerIcon: ({ focused, color, size }) => (
+          drawerIcon: ({ color, size }) => (
             <MaterialIcons name="home" size={size} color={color} />
           ),
         }}
@@ -47,7 +48,7 @@ export default function AppRouter() {
         component={Sobre}
         options={{
           headerShown: true,
-          drawerIcon: ({ focused, color, size }) => (
+          drawerIcon: ({ color, size }) => (
             <MaterialIcons name="people-alt" size={size} color={color} />
           ),
         }}
