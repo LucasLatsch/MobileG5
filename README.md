@@ -43,11 +43,10 @@ O E-Commerce inclui as seguintes funcionalidades:
 
 ## Autores do projeto
 
-- [LUCAS LATSCH](https://github.com/LucasLatsch)
-- [LILIANE DAVID](https://github.com/LilianeDavid93)
-- [EDUARDO CARNEIRO](https://github.com/eduardocs90)
-- [JOSE LOURENCO](https://github.com/joselourencocm)
-- [MATHEUS OLIVEIRA](https://github.com/Matheus-mOliveira)
-- [PALOMA](https://github.com/PalomaPts)
+| [<img loading="lazy" src="https://github.com/LucasLatsch/MobileG5/blob/main/TrabFinal/Img/lucas.jpg" width=115><br><sub>LUCAS LATSCH</sub>](https://github.com/LucasLatsch) | [<img loading="lazy" src="https://github.com/LucasLatsch/MobileG5/blob/main/TrabFinal/Img/lili.png" width=115><br><sub>LILIANE</sub>](https://github.com/LilianeDavid93) | [<img loading="lazy" src="https://github.com/LucasLatsch/MobileG5/blob/main/TrabFinal/Img/edu.png" width=115><br><sub>EDUARDO CARNEIRO</sub>](https://github.com/eduardocs90) | [<img loading="lazy" src="https://github.com/LucasLatsch/MobileG5/blob/main/TrabFinal/Img/jose.jpg" width=115><br><sub>JOSE LOURENCO</sub>](https://github.com/joselourencocm) | [<img loading="lazy" src="https://github.com/LucasLatsch/MobileG5/blob/main/TrabFinal/Img/matheus.jpg" width=115><br><sub>MATHEUS OLIVEIRA</sub>](https://github.com/Matheus-mOliveira) | [<img loading="lazy" src="https://github.com/LucasLatsch/MobileG5/blob/main/TrabFinal/Img/paloma.jpeg" width=115><br><sub>PALOMA TAVARES</sub>](https://github.com/PalomaPts) |
+| :---: | :---: | :---: | :---: | :---: | :---: |
+| LUCAS LATSCH | LILIANE  DAVID| EDUARDO CARNEIRO | JOSE LOURENCO | MATHEUS OLIVEIRA | PALOMA TAVARES |
+
+
 
 <br><br>
