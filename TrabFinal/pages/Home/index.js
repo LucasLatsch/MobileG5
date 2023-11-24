@@ -17,6 +17,7 @@ import axios from "axios";
 import ModalComponent from "../../components/Modal";
 import Botao from "../../components/Botao";
 import { Ionicons } from "@expo/vector-icons";
+import MeuInput from "../../components/Input";
 
 const DATA = [
   {
@@ -75,6 +76,8 @@ const Home = () => {
   const [itemSelecionado, setItemSelecionado] = useState(null);
   const [produto, setProduto] = useState([]);
   const [cadastro, setCadastro] = useState(true);
+  const [query, setQuery] = useState("");
+  const [resultadosPesquisa, setResultadosPesquisa] = useState([]);
 
   const getProduto = async () => {
     try {
@@ -138,15 +141,15 @@ const Home = () => {
       <TouchableOpacity onPress={() => handleItemPress(item)}>
         <View style={styles.item}>
           <Image style={styles.img} source={item.imagem} />
-          <View>
-            <Text style={styles.email}>{item.nome}</Text>
+          <View numberOfLines={2}>
+            <Text style={styles.nome}>{item.nome}</Text>
             <Text style={styles.email}>{item.marca}</Text>
             <Text style={styles.email}>{item.cor}</Text>
             {/* <Text style={styles.email}>{item.classi}</Text> */}
             {defineStar(item.classi)}
-            <Text style={styles.email}>{item.review}</Text>
+            <Text style={styles.email}>({item.review}) Reviews</Text>
             <Text style={styles.email1}>R${item.precoIni}</Text>
-            <Text style={styles.email}>R${item.precoFin}</Text>
+            <Text style={styles.preco}>R${item.precoFin}</Text>
           </View>
         </View>
       </TouchableOpacity>
@@ -216,6 +219,16 @@ const Home = () => {
       console.log(error);
     }
   };
+
+  const handleInputChange = (text) => {
+    setQuery(text);
+
+    const resultados = produto.filter((item) =>
+      item.nome.toLowerCase().includes(text.toLowerCase())
+    );
+    setResultadosPesquisa(resultados);
+  };
+
   return (
     <SafeAreaView style={styles.container}>
       <StatusBar
@@ -228,11 +241,25 @@ const Home = () => {
 
       <ScrollView vertical style={styles.scrollV} scrollEventThrottle={16}>
         <View style={styles.container}>
+          <View style={styles.search}>
+            <TextInput
+              placeholder="Pesquisar......."
+              onChangeText={handleInputChange}
+              style={styles.input}
+              value={query}
+            />
+            <Ionicons
+              name="search"
+              size={24}
+              color="#888"
+              style={{ marginRight: 0 }}
+            />
+          </View>
           <View style={styles.btn}>
             <Botao texto="Cadastrar" acao={handlePress} />
           </View>
           <FlatList
-            data={produto}
+            data={query.length > 0 ? resultadosPesquisa : produto}
             renderItem={({ item }) => <Item item={item} />}
             keyExtractor={(item) => item.id.toString()}
           />
@@ -260,24 +287,34 @@ const styles = StyleSheet.create({
   },
   item: {
     backgroundColor: "#F9F9F9",
-    padding: 20,
+    padding: 10,
     marginVertical: 8,
     marginHorizontal: 16,
     flexDirection: "row",
     alignItems: "center",
-    gap: 30,
+    gap: 10,
   },
   img: {
     borderRadius: 25,
-    width: 100,
-    height: 100,
+    width: 120,
+    height: 120,
   },
   email: {
     fontSize: 15,
   },
+  preco: {
+    fontSize: 15,
+    color: "green",
+  },
+  nome: {
+    fontSize: 15,
+    fontWeight: "700",
+    flex: 1,
+  },
   email1: {
     fontSize: 15,
     textDecorationLine: "line-through",
+    color: "red",
   },
   scrollV: {
     flex: 1,
@@ -285,6 +322,19 @@ const styles = StyleSheet.create({
   },
   btn: {
     alignItems: "center",
+  },
+  input: {
+    backgroundColor: "#F3F3F3",
+    padding: 8,
+    width: 160,
+    borderRadius: 4,
+    marginTop: 5,
+  },
+  search: {
+    justifyContent: "center",
+    alignItems: "center",
+    flexDirection: "row",
+    gap: 5,
   },
 });
 
