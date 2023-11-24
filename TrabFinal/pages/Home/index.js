@@ -92,7 +92,9 @@ const Home = () => {
         <View style={styles.item}>
           <Image style={styles.img} source={item.imagem} />
           <View>
-            <Text style={styles.nome}>{item.nome}</Text>
+            <Text style={styles.nome} numberOfLines={2} ellipsizeMode="tail">
+              {item.nome}
+            </Text>
             <Text style={styles.email}>{item.marca}</Text>
             <Text style={styles.email}>{item.cor}</Text>
             {defineStar(item.classi)}
@@ -207,7 +209,9 @@ const Home = () => {
                   alignContent: "center",
                 }}
               >
-                <Image style={styles.imgC} source={item.imagem} />
+                <TouchableOpacity onPress={() => handleItemPress(item)}>
+                  <Image style={styles.imgC} source={item.imagem} />
+                </TouchableOpacity>
               </View>
             )}
           />
