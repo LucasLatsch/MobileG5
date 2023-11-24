@@ -96,7 +96,7 @@ const Home = () => {
             <Text style={styles.email}>{item.marca}</Text>
             <Text style={styles.email}>{item.cor}</Text>
             {defineStar(item.classi)}
-            <Text style={styles.email}>({item.review}) Reviews</Text>
+            <Text style={styles.email}>({item.review}) Views</Text>
             <Text style={styles.email1}>R${item.precoIni}</Text>
             <Text style={styles.preco}>R${item.precoFin}</Text>
           </View>

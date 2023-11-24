@@ -52,7 +52,7 @@ export default function Login() {
       <View style={styles.card}>
         <Image
           source={require("../../Img/logo.jpg")}
-          style={{ width: 60, height: 60 }}
+          style={{ width: 100, height: 60 }}
         />
         <Text style={styles.saudacao}>
           All<Text style={{ color: "#FF5722" }}>Foot</Text>Wears
@@ -88,6 +88,7 @@ const styles = StyleSheet.create({
     marginBottom: 50,
     fontSize: 30,
     fontWeight: "700",
+    // textDecorationLine: "underline",
   },
   card: {
     backgroundColor: "white",
