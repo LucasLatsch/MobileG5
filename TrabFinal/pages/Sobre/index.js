@@ -20,6 +20,7 @@ export default function Sobre() {
       </TouchableOpacity>
       <View>
         <Text style={styles.nome}>{item.login}</Text>
+        <Text style={styles.email}>{item.login}@gmail.com</Text>
       </View>
     </View>
   );
@@ -77,6 +78,7 @@ const styles = StyleSheet.create({
   },
   email: {
     fontSize: 15,
+    color: "#rgb(119,119,119)",
   },
   img: {
     borderRadius: 25,
