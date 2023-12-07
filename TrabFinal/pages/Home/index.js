@@ -19,7 +19,7 @@ import Botao from "../../components/Botao";
 import { Ionicons } from "@expo/vector-icons";
 import Carousel from "react-native-reanimated-carousel";
 
-const url = "https://65495a57dd8ebcd4ab2483d2.mockapi.io/login";
+const url = "https://6571200109586eff66423ef5.mockapi.io/login";
 const Home = () => {
   const [exibirModal, setExibirModal] = useState(false);
   const [itemSelecionado, setItemSelecionado] = useState(null);
@@ -199,6 +199,7 @@ const Home = () => {
             height={250}
             autoPlay={true}
             data={produto}
+            panGestureEnabled={true}
             scrollAnimationDuration={1000}
             onSnapToItem={(index) => console.log("current index:", index)}
             renderItem={({ item }) => (
@@ -228,7 +229,7 @@ const Home = () => {
           >
             <View style={styles.search}>
               <TextInput
-                placeholder="Barra de Pesquisa..."
+                placeholder="O que você procura?"
                 onChangeText={handleInputChange}
                 style={styles.input}
                 value={query}
